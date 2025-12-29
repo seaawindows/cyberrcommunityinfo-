@@ -1,0 +1,2991 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCommunity - Edukasi Keamanan Digital Indonesia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --secondary: #7C3AED;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --success: #10B981;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+        }
+        
+        .cyber-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%232563EB" stroke-width="0.5"/><path d="M50,0 L50,100 M0,50 L100,50" fill="none" stroke="%237C3AED" stroke-width="0.3"/></svg>');
+            background-size: 200px;
+        }
+        
+        .scam-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .phishing-card {
+            border-top: 4px solid #EF4444;
+        }
+        
+        .ecommerce-card {
+            border-top: 4px solid #F59E0B;
+        }
+        
+        .investment-card {
+            border-top: 4px solid #10B981;
+        }
+        
+        .romance-card {
+            border-top: 4px solid #EC4899;
+        }
+        
+        .techsupport-card {
+            border-top: 4px solid #3B82F6;
+        }
+        
+        .hacker-card {
+            border-top: 4px solid #8B5CF6;
+        }
+        
+        .virus-card {
+            border-top: 4px solid #F97316;
+        }
+        
+        .malware-card {
+            border-top: 4px solid #6366F1;
+        }
+        
+        .jobscam-card {
+            border-top: 4px solid #F59E0B;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+            transition: width 0.5s ease;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .forum-post {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #2563EB;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .security-score {
+            background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .nav-active {
+            color: #2563EB;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .nav-active:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #2563EB;
+            border-radius: 2px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .close-modal {
+            color: #6B7280;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            z-index: 101;
+        }
+        
+        .simulation-step {
+            display: none;
+        }
+        
+        .simulation-step.active {
+            display: block;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-phishing {
+            background-color: #FEE2E2;
+            color: #DC2626;
+        }
+        
+        .badge-ecommerce {
+            background-color: #FEF3C7;
+            color: #D97706;
+        }
+        
+        .badge-investment {
+            background-color: #D1FAE5;
+            color: #059669;
+        }
+        
+        .badge-romance {
+            background-color: #FCE7F3;
+            color: #DB2777;
+        }
+        
+        .badge-techsupport {
+            background-color: #DBEAFE;
+            color: #2563EB;
+        }
+        
+        .badge-hacker {
+            background-color: #EDE9FE;
+            color: #7C3AED;
+        }
+        
+        .badge-virus {
+            background-color: #FEEBC8;
+            color: #D97706;
+        }
+        
+        .badge-malware {
+            background-color: #E0E7FF;
+            color: #4F46E5;
+        }
+        
+        .badge-jobscam {
+            background-color: #FEF3C7;
+            color: #D97706;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563EB 0%, #7C3AED 100%);
+            border-radius: 2px;
+        }
+        
+        .info-box {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border-left: 5px solid #2563EB;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-container {
+            display: flex;
+            border-bottom: 2px solid #E5E7EB;
+            margin-bottom: 24px;
+            overflow-x: auto;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            font-weight: 500;
+            color: #6B7280;
+        }
+        
+        .tab.active {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-left: 20px;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #2563EB 0%, #7C3AED 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #2563EB;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #2563EB;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .comparison-table th {
+            background-color: #F9FAFB;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #F9FAFB;
+        }
+        
+        .comparison-table .safe {
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        .comparison-table .danger {
+            color: #DC2626;
+            font-weight: 600;
+        }
+        
+        .comparison-table .warning {
+            color: #D97706;
+            font-weight: 600;
+        }
+        
+        .glossary-term {
+            background-color: #F3F4F6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #2563EB;
+        }
+        
+        .glossary-term h4 {
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+        
+        .glossary-term p {
+            color: #4B5563;
+            line-height: 1.6;
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+            margin-left: 20px;
+        }
+        
+        .step-by-step li {
+            counter-increment: step;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .step-by-step li:before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 36px;
+            height: 36px;
+            background: #2563EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(90deg, #2563EB 0%, #7C3AED 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+        
+        .accordion {
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .accordion-header {
+            background-color: #F9FAFB;
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .accordion-header.active {
+            background-color: #EFF6FF;
+            border-bottom: none;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: white;
+        }
+        
+        .accordion-content.active {
+            padding: 20px;
+            max-height: 1000px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #10B981;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .emergency-contacts {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+        
+        .emergency-contacts h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .emergency-contacts ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .emergency-contacts li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .emergency-contacts li:before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .tab-container {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .tab {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+        
+        .floating-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, #2563EB 0%, #7C3AED 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.5s ease;
+            max-width: 350px;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .close-notification {
+            margin-left: 15px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+        
+        .close-notification:hover {
+            opacity: 1;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #2563EB 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            color: #6B7280;
+            font-size: 0.9rem;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .feature-icon.security {
+            background-color: #EFF6FF;
+            color: #2563EB;
+        }
+        
+        .feature-icon.analysis {
+            background-color: #F0F9FF;
+            color: #0EA5E9;
+        }
+        
+        .feature-icon.community {
+            background-color: #FDF4FF;
+            color: #D946EF;
+        }
+        
+        .feature-icon.education {
+            background-color: #F0FDF4;
+            color: #10B981;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .virus-scan-result {
+            padding: 20px;
+            background: #FEF2F2;
+            border-radius: 10px;
+            border-left: 5px solid #EF4444;
+            margin: 20px 0;
+        }
+        
+        .virus-scan-result.safe {
+            background: #F0FDF4;
+            border-left-color: #10B981;
+        }
+        
+        .scan-progress {
+            height: 10px;
+            background: #E5E7EB;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .scan-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+            width: 0%;
+            transition: width 1s ease;
+        }
+        
+        .modern-malware-card {
+            border-left: 5px solid;
+            transition: transform 0.3s ease;
+        }
+        
+        .modern-malware-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .job-scam-illustration {
+            background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+            border: 2px dashed #F59E0B;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="gradient-bg w-10 h-10 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">CyberCommunity</h1>
+                        <p class="text-xs text-gray-500">Edukasi Keamanan Digital Indonesia</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 font-medium nav-active">Beranda</a>
+                    <a href="#scam-types" class="text-gray-700 hover:text-blue-600 font-medium">Jenis Scam</a>
+                    <a href="#hackers" class="text-gray-700 hover:text-blue-600 font-medium">Teknik Hacker</a>
+                    <a href="#viruses" class="text-gray-700 hover:text-blue-600 font-medium">Virus & Malware</a>
+                    <a href="#protection" class="text-gray-700 hover:text-blue-600 font-medium">Perlindungan</a>
+                    <a href="#tools" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="md:hidden text-gray-700" id="mobile-menu-btn">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg hidden md:block" onclick="scrollToSection('learn')">
+                        Mulai Belajar
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-white border-t py-4 hidden" id="mobile-menu">
+            <div class="container mx-auto px-4 flex flex-col space-y-4">
+                <a href="#home" class="text-gray-700 hover:text-blue-600 font-medium py-2">Beranda</a>
+                <a href="#scam-types" class="text-gray-700 hover:text-blue-600 font-medium py-2">Jenis Scam</a>
+                <a href="#hackers" class="text-gray-700 hover:text-blue-600 font-medium py-2">Teknik Hacker</a>
+                <a href="#viruses" class="text-gray-700 hover:text-blue-600 font-medium py-2">Virus & Malware</a>
+                <a href="#protection" class="text-gray-700 hover:text-blue-600 font-medium py-2">Perlindungan</a>
+                <a href="#tools" class="text-gray-700 hover:text-blue-600 font-medium py-2">Tools</a>
+                <div class="pt-4 border-t">
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg" onclick="scrollToSection('learn')">
+                        Mulai Belajar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="cyber-bg text-white py-16 md:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-20 h-20 border-2 border-blue-500 rounded-full"></div>
+            <div class="absolute bottom-10 right-10 w-32 h-32 border-2 border-purple-500 rounded-full"></div>
+            <div class="absolute top-1/2 left-1/3 w-16 h-16 border-2 border-green-500 rounded-full"></div>
+        </div>
+        
+        <!-- Ilustrasi Cybersecurity -->
+        <div class="absolute bottom-0 right-0 w-64 h-64 opacity-20 hidden md:block">
+            <div class="relative w-full h-full">
+                <div class="absolute top-0 left-0 w-20 h-20 border-4 border-blue-500 rounded-full animate-pulse"></div>
+                <div class="absolute top-10 right-10 w-16 h-16 border-4 border-red-500 rounded-full animate-pulse delay-300"></div>
+                <div class="absolute bottom-10 left-10 w-12 h-12 border-4 border-green-500 rounded-full animate-pulse delay-700"></div>
+                <div class="absolute bottom-0 right-0 w-24 h-24 border-4 border-purple-500 rounded-full animate-pulse delay-1000"></div>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Lindungi Diri dari <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Penipuan Online</span> & Serangan Digital
+                </h1>
+                <p class="text-xl mb-10 text-blue-100 max-w-3xl mx-auto">
+                    Platform edukasi keamanan siber terlengkap di Indonesia. Pelajari teknik hacker, jenis malware, penipuan lowongan kerja, dan cara melindungi diri Anda.
+                </p>
+                
+                <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                    <button onclick="scrollToSection('learn')" class="bg-white text-blue-700 hover:bg-blue-50 font-bold py-4 px-8 rounded-lg text-lg shadow-lg transition duration-300 transform hover:scale-105">
+                        <i class="fas fa-graduation-cap mr-2"></i> Mulai Belajar Gratis
+                    </button>
+                    <button onclick="openModal('quick-guide-modal')" class="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-4 px-8 rounded-lg text-lg transition duration-300">
+                        <i class="fas fa-book mr-2"></i> Panduan Cepat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-label">Pengguna Internet Indonesia Pernah Dapat Penipuan</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Rp 4,1 T</div>
+                    <div class="stat-label">Kerugian akibat Penipuan Online di 2025</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15K+</div>
+                    <div class="stat-label">Laporan Penipuan Lowongan Kerja 2023</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">65%</div>
+                    <div class="stat-label">Perusahaan Kena Serangan Ransomware</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">Apa yang Anda Dapatkan di CyberCommunity</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon security">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Panduan Perlindungan Lengkap</h3>
+                    <p class="text-gray-600">Step-by-step cara melindungi data pribadi, akun online, dan perangkat digital Anda dari serangan.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon analysis">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Analisis Kasus Nyata</h3>
+                    <p class="text-gray-600">Studi kasus penipuan online terbaru dengan analisis detail dan cara menghindarinya.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon community">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Komunitas Support</h3>
+                    <p class="text-gray-600">Diskusi dengan ahli dan korban penipuan untuk belajar dari pengalaman nyata.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon education">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Materi Edukasi Terstruktur</h3>
+                    <p class="text-gray-600">Dari dasar sampai advanced, cocok untuk pemula sampai profesional IT.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learn Section -->
+    <section id="learn" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Mulai Belajar Keamanan Digital</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto mt-4">Pilih topik yang ingin Anda pelajari. Semua materi disajikan dengan detail dan contoh nyata.</p>
+            </div>
+            
+            <div class="tab-container">
+                <div class="tab active" data-tab="scam-tab">Penipuan Online</div>
+                <div class="tab" data-tab="hacker-tab">Teknik Hacker</div>
+                <div class="tab" data-tab="virus-tab">Virus & Malware</div>
+                <div class="tab" data-tab="protection-tab">Perlindungan Diri</div>
+                <div class="tab" data-tab="tools-tab">Tools Keamanan</div>
+                <div class="tab" data-tab="job-scam-tab">Lowongan Kerja Palsu</div>
+            </div>
+            
+            <!-- Scam Tab -->
+            <div id="scam-tab" class="tab-content active">
+                <div class="info-box">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Penipuan Online (Cyber Scam)</h3>
+                    <p class="text-gray-700 mb-4">Penipuan online adalah kejahatan siber yang menggunakan internet untuk menipu korban agar memberikan uang, data pribadi, atau akses ke sistem. Berikut adalah jenis-jenis penipuan online paling berbahaya:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="scam-card phishing-card">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="badge badge-phishing">Phishing</span>
+                                    <span class="text-sm font-bold text-red-600">Tingkat Bahaya: Tinggi</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Email & Website Palsu</h4>
+                                <p class="text-gray-600 mb-4">Menyamar sebagai institusi resmi untuk mencuri data login dan informasi sensitif.</p>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Domain email tidak resmi (@gmail.com bukan @bank.co.id)</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Link menuju URL mencurigakan</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Meminta password, PIN, atau OTP</span>
+                                    </div>
+                                </div>
+                                
+                                <button onclick="openDetailModal('phishing')" class="text-blue-600 hover:text-blue-800 font-medium">
+                                    <i class="fas fa-info-circle mr-1"></i> Pelajari Detail & Contoh
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="scam-card investment-card">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="badge badge-investment">Investasi Bodong</span>
+                                    <span class="text-sm font-bold text-red-600">Tingkat Bahaya: Sangat Tinggi</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Skema Investasi Palsu</h4>
+                                <p class="text-gray-600 mb-4">Menjanjikan return tinggi tidak realistis dengan skema Ponzi atau piramida.</p>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Return 5-10% per bulan (tidak realistis)</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Tidak ada izin OJK</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Bonus referral berlebihan</span>
+                                    </div>
+                                </div>
+                                
+                                <button onclick="openDetailModal('investment')" class="text-blue-600 hover:text-blue-800 font-medium">
+                                    <i class="fas fa-info-circle mr-1"></i> Pelajari Detail & Contoh
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 mt-8 text-gray-900">Data Statistik Penipuan Online di Indonesia</h4>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Jenis Penipuan</th>
+                                    <th>Korban (2023)</th>
+                                    <th>Kerugian Rata-rata</th>
+                                    <th>Modus Operandi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Phishing</td>
+                                    <td>2,5 juta orang</td>
+                                    <td class="danger">Rp 5-50 juta</td>
+                                    <td>Email/SMS palsu, website clone</td>
+                                </tr>
+                                <tr>
+                                    <td>Investment Scam</td>
+                                    <td>350 ribu orang</td>
+                                    <td class="danger">Rp 10-500 juta</td>
+                                    <td>Return tinggi, skema Ponzi</td>
+                                </tr>
+                                <tr>
+                                    <td>E-commerce Scam</td>
+                                    <td>1,8 juta orang</td>
+                                    <td class="warning">Rp 500 ribu - 5 juta</td>
+                                    <td>Barang tidak dikirim, palsu</td>
+                                </tr>
+                                <tr>
+                                    <td>Romance Scam</td>
+                                    <td>120 ribu orang</td>
+                                    <td class="danger">Rp 20-200 juta</td>
+                                    <td>Pacaran online, minta transfer</td>
+                                </tr>
+                                <tr>
+                                    <td>Tech Support Scam</td>
+                                    <td>800 ribu orang</td>
+                                    <td class="warning">Rp 1-10 juta</td>
+                                    <td>Mengaku support, minta akses remote</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 mt-8 text-gray-900">Bagaimana Scammer Bekerja?</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h5 class="font-bold text-lg">1. Research & Targeting</h5>
+                            <p class="text-gray-700">Scammer mengumpulkan data korban dari media sosial, data bocor, atau membeli database. Mereka mencari target rentan (lansia, pengguna baru internet).</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5 class="font-bold text-lg">2. Pendekatan & Manipulasi</h5>
+                            <p class="text-gray-700">Menggunakan teknik social engineering: menciptakan urgensi, menyamar sebagai pihak berwenang, atau membangun hubungan emosional.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5 class="font-bold text-lg">3. Eksekusi</h5>
+                            <p class="text-gray-700">Meminta transfer uang, data sensitif, atau akses ke sistem. Menggunakan mule account untuk menyamarkan asal uang.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5 class="font-bold text-lg">4. Penghilangan Jejak</h5>
+                            <p class="text-gray-700">Menghapus akun, mengubah identitas, memindahkan uang ke rekening luar negeri, atau menggunakan cryptocurrency.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="emergency-contacts">
+                        <h3 class="text-2xl font-bold mb-6">Kontak Darurat Jika Menjadi Korban</h3>
+                        <ul>
+                            <li><strong>Polisi Cyber Crime:</strong> 110 atau melalui website patrolisiber.id</li>
+                            <li><strong>Layanan Pengaduan Konsumen:</strong> 0853 1111 1010 (Halo Kemenkominfo)</li>
+                            <li><strong>OJK (Investasi Bodong):</strong> 157 atau email pengaduan@ojk.go.id</li>
+                            <li><strong>Bank Indonesia (Transaksi Mencurigakan):</strong> (021) 381-7187</li>
+                            <li><strong>ID-CERT (Insiden Keamanan Siber):</strong> 021-2966-1515</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hacker Tab -->
+            <div id="hacker-tab" class="tab-content">
+                <div class="info-box">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Teknik Hacker & Serangan Siber</h3>
+                    <p class="text-gray-700 mb-6">Hacker menggunakan berbagai teknik canggih untuk membobol sistem, mencuri data, atau menguasai perangkat. Berikut adalah teknik-teknik yang perlu Anda waspadai:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="scam-card hacker-card">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="badge badge-hacker">Social Engineering</span>
+                                    <span class="text-sm font-bold text-purple-600">Teknik: Manipulasi Psikologis</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Manipulasi Manusia</h4>
+                                <p class="text-gray-600 mb-4">Memanipulasi korban secara psikologis untuk mendapatkan informasi sensitif atau akses.</p>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user-secret text-purple-500 mr-2"></i>
+                                        <span class="text-sm">Pretexting: Membuat skenario palsu</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user-secret text-purple-500 mr-2"></i>
+                                        <span class="text-sm">Baiting: Menawarkan umpan menarik</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user-secret text-purple-500 mr-2"></i>
+                                        <span class="text-sm">Tailgating: Mengikuti masuk area terbatas</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="scam-card hacker-card">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="badge badge-hacker">Technical Attack</span>
+                                    <span class="text-sm font-bold text-purple-600">Teknik: Eksploitasi Teknis</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Serangan Teknis</h4>
+                                <p class="text-gray-600 mb-4">Memanfaatkan kelemahan teknis dalam sistem, software, atau jaringan.</p>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-code text-purple-500 mr-2"></i>
+                                        <span class="text-sm">SQL Injection: Serangan database</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-code text-purple-500 mr-2"></i>
+                                        <span class="text-sm">DDoS: Melumpuhkan layanan</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-code text-purple-500 mr-2"></i>
+                                        <span class="text-sm">Zero-day Exploit: Manfaatkan bug baru</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Teknik Hacker Lanjutan - TAMBAHAN BARU -->
+                    <div class="mt-8">
+                        <h4 class="text-2xl font-bold mb-6 text-gray-900 border-b pb-3">Teknik Hacker Lanjutan</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h5 class="font-bold text-lg mb-3 text-purple-700">1. Advanced Persistent Threat (APT)</h5>
+                                <p class="text-gray-700 mb-3">Serangan bertarget jangka panjang oleh kelompok terorganisir (biasanya state-sponsored).</p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><strong>Contoh:</strong> APT28 (Fancy Bear), APT29 (Cozy Bear)</li>
+                                    <li><strong>Target:</strong> Pemerintah, militer, perusahaan strategis</li>
+                                    <li><strong>Durasi:</strong> Bulanan sampai tahunan di dalam jaringan target</li>
+                                    <li><strong>Tujuan:</strong> Spionase, pencurian IP, sabotase</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h5 class="font-bold text-lg mb-3 text-purple-700">2. Supply Chain Attack</h5>
+                                <p class="text-gray-700 mb-3">Menyerang melalui vendor/software pihak ketiga yang digunakan target.</p>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li><strong>Contoh:</strong> SolarWinds (2020), Kaseya (2021)</li>
+                                    <li><strong>Cara kerja:</strong> Kompromi update software legit</li>
+                                    <li><strong>Efek:</strong> Ribuan organisasi terinfeksi sekaligus</li>
+                                    <li><strong>Deteksi:</strong> Sangat sulit karena menggunakan jalur legit</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Jenis-Jenis Hacker</h4>
+                    <div class="bg-gray-100 p-6 rounded-lg mb-6">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Jenis Hacker</th>
+                                    <th>Motivasi</th>
+                                    <th>Aktivitas</th>
+                                    <th>Bahaya untuk Anda</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Black Hat</strong></td>
+                                    <td class="danger">Keuntungan finansial, sabotase</td>
+                                    <td>Mencuri data, ransomware, penipuan</td>
+                                    <td class="danger">Sangat Tinggi</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>White Hat</strong></td>
+                                    <td class="safe">Membantu, etis</td>
+                                    <td>Penetration testing, konsultan keamanan</td>
+                                    <td class="safe">Aman (membantu)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gray Hat</strong></td>
+                                    <td class="warning">Campuran, sering ilegal</td>
+                                    <td>Hack tanpa izin tapi laporkan bug</td>
+                                    <td class="warning">Menengah</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Script Kiddie</strong></td>
+                                    <td>Iseng, ingin terkenal</td>
+                                    <td>Gunakan tools orang, deface website</td>
+                                    <td class="warning">Rendah-Menengah</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>State-Sponsored</strong></td>
+                                    <td class="danger">Spionase, politik</td>
+                                    <td>Serangan APT, spyware tingkat tinggi</td>
+                                    <td class="danger">Sangat Tinggi (jika target)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Serangan Hacker yang Sering Terjadi</h4>
+                    <div class="space-y-4">
+                        <div class="accordion">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-bold">1. Ransomware Attack</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p><strong>Deskripsi:</strong> Malware yang mengenkripsi file korban dan meminta tebusan (ransom) untuk dekripsi.</p>
+                                <p><strong>Contoh Nyata:</strong> WannaCry (2017) menginfeksi 200.000 komputer di 150 negara, termasuk rumah sakit di Inggris.</p>
+                                <p><strong>Cara Kerja:</strong> Masuk via email phishing, RDP lemah, atau software tidak di-update → Enkripsi file → Tampilkan pesan tebusan (biasanya dalam Bitcoin)</p>
+                                <p><strong>Kerugian Global:</strong> $20 miliar pada 2021, diperkirakan $265 miliar pada 2031.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-bold">2. Man-in-the-Middle (MITM) Attack</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p><strong>Deskripsi:</strong> Hacker menyelip di antara komunikasi dua pihak untuk mencuri atau memanipulasi data.</p>
+                                <p><strong>Contoh:</strong> Di wifi publik, hacker bisa melihat semua traffic Anda jika tidak menggunakan HTTPS.</p>
+                                <p><strong>Cara Kerja:</strong> Intercept komunikasi → Decrypt jika mungkin → Baca/modify data → Encrypt kembali dan kirim ke penerima</p>
+                                <p><strong>Pencegahan:</strong> Selalu gunakan HTTPS, VPN di wifi publik, hindari jaringan tidak dikenal.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-bold">3. Credential Stuffing</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p><strong>Deskripsi:</strong> Menggunakan username/password yang bocor dari satu website untuk mencoba login di website lain.</p>
+                                <p><strong>Statistik:</strong> 193 miliar upaya credential stuffing secara global di 2020.</p>
+                                <p><strong>Contoh:</strong> Data bocor dari LinkedIn 2012 (6,5 juta hash password) masih digunakan untuk serangan tahun 2023.</p>
+                                <p><strong>Solusi:</strong> Gunakan password berbeda untuk setiap akun, aktifkan 2FA, pantau HaveIBeenPwned.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 mt-8 text-gray-900">Glossary Istilah Hacker</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="glossary-term">
+                            <h4>APT (Advanced Persistent Threat)</h4>
+                            <p>Serangan siber kompleks dan bertarget yang dilakukan oleh kelompok terorganisir, biasanya state-sponsored, yang bertahan lama di jaringan target.</p>
+                        </div>
+                        <div class="glossary-term">
+                            <h4>Zero-day Vulnerability</h4>
+                            <p>Kelemahan keamanan dalam software yang belum diketahui oleh vendor, sehingga belum ada patch/perbaikan yang tersedia.</p>
+                        </div>
+                        <div class="glossary-term">
+                            <h4>Botnet</h4>
+                            <p>Jaringan komputer yang terinfeksi malware dan dikendalikan oleh hacker untuk melakukan serangan DDoS, spam, atau penambangan crypto.</p>
+                        </div>
+                        <div class="glossary-term">
+                            <h4>SQL Injection</h4>
+                            <p>Teknik serangan dengan menyisipkan kode SQL berbahaya ke input website untuk memanipulasi database.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Virus & Malware Tab -->
+            <div id="virus-tab" class="tab-content">
+                <div class="info-box">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Virus, Malware & Aplikasi Berbahaya</h3>
+                    <p class="text-gray-700 mb-6">Malware (malicious software) adalah program berbahaya yang dirancang untuk merusak, mencuri data, atau mengambil alih sistem. Setiap hari ada 560.000 malware baru ditemukan.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="scam-card virus-card">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="badge badge-virus">Virus Komputer</span>
+                                    <span class="text-sm font-bold text-orange-600">Menyebar via File</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Program yang Mereplikasi Diri</h4>
+                                <p class="text-gray-600 mb-4">Menyisipkan diri ke file/program lain dan menyebar ketika file tersebut dijalankan.</p>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-biohazard text-orange-500 mr-2"></i>
+                                        <span class="text-sm">Boot sector virus: Menginfeksi bagian boot komputer</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-biohazard text-orange-500 mr-2"></i>
+                                        <span class="text-sm">Macro virus: Menginfeksi dokumen Office</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-biohazard text-orange-500 mr-2"></i>
+                                        <span class="text-sm">Polymorphic virus: Mengubah kode untuk menghindari deteksi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="scam-card malware-card">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="badge badge-malware">Spyware</span>
+                                    <span class="text-sm font-bold text-blue-600">Mata-mata Digital</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Memata-matai Aktivitas</h4>
+                                <p class="text-gray-600 mb-4">Mengumpulkan informasi tentang pengguna tanpa sepengetahuan mereka.</p>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-eye text-blue-500 mr-2"></i>
+                                        <span class="text-sm">Keylogger: Mencatat semua ketikan keyboard</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-eye text-blue-500 mr-2"></i>
+                                        <span class="text-sm">Adware: Menampilkan iklan berlebihan</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-eye text-blue-500 mr-2"></i>
+                                        <span class="text-sm">Trojan spy: Menyamar sebagai software legit</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Malware Modern 2024-2025 - TAMBAHAN BARU -->
+                    <div class="mt-8">
+                        <h4 class="text-2xl font-bold mb-6 text-gray-900 border-b pb-3">Malware Modern 2024-2025</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm modern-malware-card" style="border-left-color: #EF4444;">
+                                <div class="flex items-center mb-3">
+                                    <div class="bg-red-100 p-2 rounded-lg mr-3">
+                                        <i class="fas fa-lock text-red-600"></i>
+                                    </div>
+                                    <h5 class="font-bold text-gray-900">Ransomware-as-a-Service (RaaS)</h5>
+                                </div>
+                                <p class="text-sm text-gray-600">Model bisnis ransomware yang bisa disewa oleh hacker pemula.</p>
+                                <div class="mt-3">
+                                    <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Contoh: LockBit 3.0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm modern-malware-card" style="border-left-color: #3B82F6;">
+                                <div class="flex items-center mb-3">
+                                    <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                        <i class="fas fa-robot text-blue-600"></i>
+                                    </div>
+                                    <h5 class="font-bold text-gray-900">AI-Powered Malware</h5>
+                                </div>
+                                <p class="text-sm text-gray-600">Malware yang menggunakan AI untuk menghindari deteksi dan beradaptasi.</p>
+                                <div class="mt-3">
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Contoh: DeepLocker</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm modern-malware-card" style="border-left-color: #10B981;">
+                                <div class="flex items-center mb-3">
+                                    <div class="bg-green-100 p-2 rounded-lg mr-3">
+                                        <i class="fas fa-mobile-alt text-green-600"></i>
+                                    </div>
+                                    <h5 class="font-bold text-gray-900">Mobile Banking Trojans</h5>
+                                </div>
+                                <p class="text-sm text-gray-600">Malware khusus smartphone yang mencuri data banking dan OTP.</p>
+                                <div class="mt-3">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Contoh: Cerberus, EventBot</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Jenis-Jenis Malware Utama</h4>
+                    <div class="bg-gray-100 p-6 rounded-lg mb-6">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Jenis Malware</th>
+                                    <th>Tujuan Utama</th>
+                                    <th>Cara Infeksi</th>
+                                    <th>Contoh Terkenal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Virus</strong></td>
+                                    <td>Merusak sistem, menyebar</td>
+                                    <td>File executable, dokumen</td>
+                                    <td>ILOVEYOU, Melissa</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Worm</strong></td>
+                                    <td>Menyebar cepat, bandwidth</td>
+                                    <td>Network vulnerability</td>
+                                    <td>WannaCry, Stuxnet</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Trojan Horse</strong></td>
+                                    <td>Backdoor, mencuri data</td>
+                                    <td>Software palsu, game crack</td>
+                                    <td>Zeus, Emotet</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ransomware</strong></td>
+                                    <td>Memeras uang tebusan</td>
+                                    <td>Phishing, RDP lemah</td>
+                                    <td>Locky, Ryuk, REvil</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Spyware</strong></td>
+                                    <td>Mata-mata, iklan</td>
+                                    <td>Software bundle, website</td>
+                                    <td>CoolWebSearch, FinFisher</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Adware</strong></td>
+                                    <td>Menampilkan iklan</td>
+                                    <td>Software gratis (freeware)</td>
+                                    <td>Fireball, DealPly</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rootkit</strong></td>
+                                    <td>Menyembunyikan malware lain</td>
+                                    <td>Exploit vulnerability</td>
+                                    <td>Sony BMG, TDSS</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bot/Botnet</strong></td>
+                                    <td>DDoS, spam, mining</td>
+                                    <td>Malware downloader</td>
+                                    <td>Mirai, Echobot</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Cara Malware Menginfeksi Perangkat</h4>
+                    <ol class="step-by-step">
+                        <li>
+                            <strong>Social Engineering</strong>
+                            <p>Pengguna ditipu untuk menginstall malware sendiri melalui:
+                            <br>• Email attachment berbahaya
+                            <br>• Software crack/keygen
+                            <br>• Website berbahaya yang minta install plugin
+                            <br>• Flash drive yang ditinggalkan di tempat umum (USB drop attack)</p>
+                        </li>
+                        <li>
+                            <strong>Exploit Software Vulnerability</strong>
+                            <p>Malware masuk melalui celah keamanan di software yang tidak di-update:
+                            <br>• Browser dengan vulnerability
+                            <br>• Sistem operasi tanpa patch terbaru
+                            <br>• Plugin/extension berbahaya
+                            <br>• Software pihak ketiga yang rentan</p>
+                        </li>
+                        <li>
+                            <strong>Network Propagation</strong>
+                            <p>Malware menyebar melalui jaringan:
+                            <br>• Wifi publik tidak aman
+                            <br>• Bluetooth pairing dengan perangkat tidak dikenal
+                            <br>• Network share yang tidak diproteksi
+                            <br>• Port terbuka yang tidak perlu</p>
+                        </li>
+                        <li>
+                            <strong>Supply Chain Attack</strong>
+                            <p>Malware disisipkan dalam software legit sebelum sampai ke pengguna:
+                            <br>• Compiler yang sudah di-compromise
+                            <br>• Update software yang disusupi
+                            <br>• Software library berbahaya
+                            <br>• Hardware yang sudah terinfeksi dari pabrik</p>
+                        </li>
+                    </ol>
+                    
+                    <h4 class="text-xl font-bold mb-4 mt-8 text-gray-900">Tanda-tanda Perangkat Terinfeksi Malware</h4>
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                        <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                            <li><strong>Performa lambat:</strong> Komputer/HP tiba-tiba lemot padahal tidak buka aplikasi berat</li>
+                            <li><strong>Iklan muncul tiba-tiba:</strong> Pop-up iklan di browser atau desktop bahkan saat tidak browsing</li>
+                            <li><strong>Baterai cepat habis:</strong> HP cepat panas dan baterai drop padahal tidak digunakan</li>
+                            <li><strong>Data internet boros:</strong> Kuota cepat habis padahal penggunaan normal</li>
+                            <li><strong>Aplikasi aneh:</strong> Ada aplikasi yang tidak diinstall muncul sendiri</li>
+                            <li><strong>Redirect browser:</strong> Browser dialihkan ke website aneh meski ketik URL benar</li>
+                            <li><strong>File hilang atau terenkripsi:</strong> File tidak bisa dibuka atau ada ekstensi aneh</li>
+                            <li><strong>Akun diretake:</strong> Teman dapat pesan aneh dari akun media sosial Anda</li>
+                            <li><strong>Antivirus mati sendiri:</strong> Software keamanan tidak bisa dijalankan atau dinonaktifkan paksa</li>
+                            <li><strong>Proses aneh di Task Manager:</strong> Ada proses tidak dikenal menggunakan resource tinggi</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+                        <h4 class="text-xl font-bold mb-4 text-gray-900">Virus Scanner Online</h4>
+                        <p class="text-gray-700 mb-4">Cek apakah file atau aplikasi Anda mengandung virus:</p>
+                        
+                        <div class="mb-4">
+                            <input type="file" id="fileInput" class="hidden" onchange="scanFile()">
+                            <button onclick="document.getElementById('fileInput').click()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg mr-4">
+                                <i class="fas fa-upload mr-2"></i> Upload File untuk Scan
+                            </button>
+                            <button onclick="simulateVirusScan()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-6 rounded-lg">
+                                <i class="fas fa-play mr-2"></i> Coba Simulasi Scan
+                            </button>
+                        </div>
+                        
+                        <div id="scanResult" class="hidden">
+                            <div class="scan-progress">
+                                <div id="scanProgressBar" class="scan-progress-bar"></div>
+                            </div>
+                            <div id="scanResultContent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Protection Tab -->
+            <div id="protection-tab" class="tab-content">
+                <div class="info-box">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Perlindungan Lengkap dari Serangan Digital</h3>
+                    <p class="text-gray-700 mb-6">Berikut adalah panduan komprehensif untuk melindungi diri dari semua jenis ancaman digital, dari scam hingga malware canggih.</p>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Langkah-Langkah Perlindungan Dasar</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-key text-green-600 text-xl"></i>
+                            </div>
+                            <h5 class="font-bold text-lg mb-2">1. Manajemen Password</h5>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Gunakan password minimal 12 karakter</li>
+                                <li>• Kombinasikan huruf, angka, simbol</li>
+                                <li>• Password berbeda untuk setiap akun</li>
+                                <li>• Gunakan password manager</li>
+                                <li>• Aktifkan Two-Factor Authentication (2FA)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-shield-alt text-blue-600 text-xl"></i>
+                            </div>
+                            <h5 class="font-bold text-lg mb-2">2. Keamanan Perangkat</h5>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Update sistem operasi reguler</li>
+                                <li>• Install antivirus terpercaya</li>
+                                <li>• Aktifkan firewall</li>
+                                <li>• Backup data rutin (3-2-1 rule)</li>
+                                <li>• Enkripsi harddisk penting</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-user-shield text-purple-600 text-xl"></i>
+                            </div>
+                            <h5 class="font-bold text-lg mb-2">3. Kebiasaan Online Aman</h5>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Hindari klik link tidak dikenal</li>
+                                <li>• Cek SSL sebelum input data</li>
+                                <li>• Waspada wifi publik gratis</li>
+                                <li>• Verifikasi sebelum percaya</li>
+                                <li>• Batasi info pribadi di sosial media</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Perlindungan Spesifik untuk Ancaman Berbeda</h4>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 bg-gray-50 rounded-lg">
+                            <h5 class="font-bold text-lg mb-3 text-blue-700">A. Melindungi dari Penipuan Online</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h6 class="font-bold mb-2">Untuk Phishing:</h6>
+                                    <ul class="text-sm text-gray-700 space-y-1">
+                                        <li>✓ Selalu verifikasi pengirim email</li>
+                                        <li>✓ Hover link sebelum klik untuk lihat URL</li>
+                                        <li>✓ Bank tidak akan minta data via link email</li>
+                                        <li>✓ Laporkan email phishing ke provider</li>
+                                        <li>✓ Gunakan email filter/spam detection</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h6 class="font-bold mb-2">Untuk Investment Scam:</h6>
+                                    <ul class="text-sm text-gray-700 space-y-1">
+                                        <li>✓ Cek izin OJK di website resmi</li>
+                                        <li>✓ Return tinggi = risiko tinggi (Hukum Investasi)</li>
+                                        <li>✓ Tanya legalitas & audit keuangan</li>
+                                        <li>✓ Minta kontak fisik perusahaan</li>
+                                        <li>✓ Konsultasi dengan financial advisor</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-6 bg-gray-50 rounded-lg">
+                            <h5 class="font-bold text-lg mb-3 text-purple-700">B. Melindungi dari Serangan Hacker</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h6 class="font-bold mb-2">Untuk Social Engineering:</h6>
+                                    <ul class="text-sm text-gray-700 space-y-1">
+                                        <li>✓ Verifikasi identitas penelpon/email</li>
+                                        <li>✓ Jangan berikan info sensitif via telepon</li>
+                                        <li>✓ Perusahaan legit tidak minta OTP/PIN</li>
+                                        <li>✓ Waspada tekanan/urgensi berlebihan</li>
+                                        <li>✓ Edukasi keluarga terutama lansia</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h6 class="font-bold mb-2">Untuk Technical Attacks:</h6>
+                                    <ul class="text-sm text-gray-700 space-y-1">
+                                        <li>✓ Update semua software & OS</li>
+                                        <li>✓ Gunakan VPN di wifi publik</li>
+                                        <li>✓ Matikan Bluetooth jika tidak digunakan</li>
+                                        <li>✓ Gunakan HTTPS Everywhere extension</li>
+                                        <li>✓ Monitor aktivitas akun rutin</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-6 bg-gray-50 rounded-lg">
+                            <h5 class="font-bold text-lg mb-3 text-orange-700">C. Melindungi dari Virus & Malware</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h6 class="font-bold mb-2">Pencegahan Infeksi:</h6>
+                                    <ul class="text-sm text-gray-700 space-y-1">
+                                        <li>✓ Download software hanya dari sumber resmi</li>
+                                        <li>✓ Scan semua file download dengan antivirus</li>
+                                        <li>✓ Hindari crack/keygen/patch illegal</li>
+                                        <li>✓ Nonaktifkan auto-run untuk flashdisk</li>
+                                        <li>✓ Backup data penting secara rutin</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h6 class="font-bold mb-2">Jika Sudah Terinfeksi:</h6>
+                                    <ul class="text-sm text-gray-700 space-y-1">
+                                        <li>✓ Putuskan dari internet (unplug LAN/WiFi)</li>
+                                        <li>✓ Boot dalam Safe Mode</li>
+                                        <li>✓ Scan dengan antivirus terupdate</li>
+                                        <li>✓ Gunakan removal tools khusus</li>
+                                        <li>✓ Jika parah, format & install ulang OS</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 mt-8 text-gray-900">Checklist Keamanan Digital Harian</h4>
+                    <div class="bg-white p-6 rounded-lg border border-gray-300">
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="check1" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="check1" class="text-gray-700">Update OS dan software terbaru</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="check2" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="check2" class="text-gray-700">Cek email tidak dikenal sebelum buka/link</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="check3" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="check3" class="text-gray-700">Backup data penting (3-2-1 rule)</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="check4" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="check4" class="text-gray-700">Review izin aplikasi di smartphone</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="check5" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="check5" class="text-gray-700">Cek aktivitas login mencurigakan di akun</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="check6" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="check6" class="text-gray-700">Scan cepat dengan antivirus</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="check7" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="check7" class="text-gray-700">Update password jika diperlukan</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="check8" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="check8" class="text-gray-700">Verifikasi transaksi finansial</label>
+                            </div>
+                        </div>
+                        
+                        <button onclick="checkAllBoxes()" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg">
+                            <i class="fas fa-check-circle mr-2"></i> Tandai Semua Selesai
+                        </button>
+                    </div>
+                    
+                    <div class="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg">
+                        <h4 class="text-xl font-bold mb-4 text-gray-900">Resources & Tools Tambahan</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="resource-card">
+                                <h5 class="font-bold text-lg mb-2">Download E-book</h5>
+                                <p class="text-gray-600 mb-3">"Panduan Lengkap Keamanan Digital untuk Keluarga Indonesia" (PDF, 120 halaman)</p>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-download mr-2"></i> Download Gratis
+                                </a>
+                            </div>
+                            
+                            <div class="resource-card">
+                                <h5 class="font-bold text-lg mb-2">Template Emergency</h5>
+                                <p class="text-gray-600 mb-3">Template laporan polisi, checklist pemulihan, dan kontak darurat yang bisa dicetak.</p>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-file-download mr-2"></i> Download Template
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tools Tab -->
+            <div id="tools-tab" class="tab-content">
+                <div class="info-box">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Tools & Utilities Keamanan Digital</h3>
+                    <p class="text-gray-700 mb-6">Gunakan tools berikut untuk memeriksa, memantau, dan meningkatkan keamanan digital Anda.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="tool-card">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-globe text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-900">Website Safety Checker</h4>
+                                    <p class="text-gray-600 text-sm">Cek keamanan website sebelum mengunjungi</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <input type="text" id="websiteCheckInput" class="w-full border border-gray-300 rounded-lg px-4 py-3 mb-3" placeholder="https://example.com">
+                                <button onclick="checkWebsiteSafety()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg">
+                                    Analisis Website
+                                </button>
+                            </div>
+                            
+                            <div id="websiteCheckResult" class="hidden">
+                                <!-- Hasil akan ditampilkan di sini -->
+                            </div>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-green-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-key text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-900">Password Strength Tester</h4>
+                                    <p class="text-gray-600 text-sm">Cek kekuatan password Anda</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <input type="password" id="passwordInput" class="w-full border border-gray-300 rounded-lg px-4 py-3 mb-3" placeholder="Masukkan password">
+                                <button onclick="checkPasswordStrength()" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-lg">
+                                    Test Kekuatan Password
+                                </button>
+                            </div>
+                            
+                            <div id="passwordResult" class="hidden">
+                                <!-- Hasil akan ditampilkan di sini -->
+                            </div>
+                        </div>
+                        
+                        <div class="tool-card">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-envelope text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-900">Email Header Analyzer</h4>
+                                    <p class="text-gray-600 text-sm">Analisis header email untuk deteksi phishing</p>
+                                </div>
+                            </div>
+                            
+                            <button onclick="openModal('email-analyzer-modal')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 rounded-lg">
+                                Buka Email Analyzer
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Tools Lain yang Direkomendasikan</h4>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-bold text-lg mb-3">Software Keamanan Gratis</h5>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-shield-alt text-blue-500 mr-2"></i>
+                                        <span><strong>Malwarebytes</strong> - Malware removal tool</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-shield-alt text-blue-500 mr-2"></i>
+                                        <span><strong>Bitdefender Free</strong> - Antivirus ringan</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-shield-alt text-blue-500 mr-2"></i>
+                                        <span><strong>KeePass</strong> - Password manager open source</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-shield-alt text-blue-500 mr-2"></i>
+                                        <span><strong>VeraCrypt</strong> - Disk encryption</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h5 class="font-bold text-lg mb-3">Online Security Check</h5>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-search text-green-500 mr-2"></i>
+                                        <span><strong>HaveIBeenPwned</strong> - Cek kebocoran data</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-search text-green-500 mr-2"></i>
+                                        <span><strong>VirusTotal</strong> - Scan file/URL dengan 70+ antivirus</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-search text-green-500 mr-2"></i>
+                                        <span><strong>SSL Labs Test</strong> - Cek keamanan SSL website</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-search text-green-500 mr-2"></i>
+                                        <span><strong>Web of Trust</strong> - Reputasi website</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Job Scam Tab - TAB BARU -->
+            <div id="job-scam-tab" class="tab-content">
+                <div class="info-box">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">Penipuan Lowongan Kerja & Recruitment Scam</h3>
+                    <p class="text-gray-700 mb-6">Penipuan lowongan kerja adalah salah satu jenis kejahatan siber yang memanfaatkan pencari kerja dengan menjanjikan pekerjaan palsu untuk mencuri data pribadi, meminta uang, atau merekrut korban ke dalam skema penipuan lainnya.</p>
+                    
+                    <!-- Ilustrasi Modus Penipuan -->
+                    <div class="job-scam-illustration p-6 rounded-lg mb-8">
+                        <h5 class="font-bold text-lg mb-4 text-orange-800 text-center">Ilustrasi Modus Penipuan Lowongan Kerja</h5>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="text-center">
+                                <div class="bg-white p-4 rounded-lg shadow-sm mb-3">
+                                    <i class="fas fa-comment-dollar text-3xl text-yellow-500 mb-2"></i>
+                                    <p class="text-sm font-medium">Minta Uang Administrasi</p>
+                                </div>
+                                <p class="text-xs text-gray-600">"Bayar Rp 500.000 untuk processing fee"</p>
+                            </div>
+                            
+                            <div class="text-center">
+                                <div class="bg-white p-4 rounded-lg shadow-sm mb-3">
+                                    <i class="fas fa-users text-3xl text-red-500 mb-2"></i>
+                                    <p class="text-sm font-medium">Skema MLM/Referral</p>
+                                </div>
+                                <p class="text-xs text-gray-600">"Dapat bonus Rp 1 juta per orang direkrut"</p>
+                            </div>
+                            
+                            <div class="text-center">
+                                <div class="bg-white p-4 rounded-lg shadow-sm mb-3">
+                                    <i class="fas fa-file-invoice-dollar text-3xl text-green-500 mb-2"></i>
+                                    <p class="text-sm font-medium">Training Berbayar</p>
+                                </div>
+                                <p class="text-xs text-gray-600">"Ikut training dulu bayar Rp 2 juta"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="scam-card jobscam-card">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="badge badge-jobscam">Modus Operandi</span>
+                                    <span class="text-sm font-bold text-red-600">Tingkat Bahaya: Tinggi</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Cara Kerja Scammer Lowongan Kerja</h4>
+                                <p class="text-gray-600 mb-4">Scammer menggunakan berbagai teknik untuk menjebak pencari kerja yang sedang membutuhkan.</p>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Membuat perusahaan fiktif dengan website dan kontak palsu</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Menawarkan gaji tinggi dengan syarat mudah</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Meminta uang untuk administrasi, training, atau peralatan</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Merekrut korban untuk menjadi bagian dari skema MLM/ponzi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="scam-card jobscam-card">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span class="badge badge-jobscam">Statistik</span>
+                                    <span class="text-sm font-bold text-orange-600">Data Terkini 2024</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Fakta Penipuan Lowongan Kerja</h4>
+                                <p class="text-gray-600 mb-4">Berdasarkan laporan Kemnaker dan Bareskrim Polri:</p>
+                                
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-chart-bar text-orange-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">15.000+ laporan penipuan lowongan kerja di 2023</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-chart-bar text-orange-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Kerugian rata-rata Rp 3-10 juta per korban</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-chart-bar text-orange-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">65% korban adalah fresh graduate</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-chart-bar text-orange-500 mr-2 text-sm"></i>
+                                        <span class="text-sm">Platform utama: Job portal (40%), Media sosial (35%), WhatsApp (25%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">12 Langkah Detail Menghindari Penipuan Lowongan Kerja</h4>
+                    
+                    <div class="step-by-step mb-8">
+                        <li>
+                            <strong>Verifikasi Perusahaan</strong>
+                            <p>Cek keberadaan perusahaan di:
+                            <br>• <strong>Website resmi Kemenaker</strong> (sisnaker.kemnaker.go.id) untuk cek perusahaan legal
+                            <br>• <strong>Website AHU Online</strong> untuk verifikasi legalitas perusahaan
+                            <br>• <strong>Google Maps</strong> untuk cek alamat fisik perusahaan
+                            <br>• <strong>Google Search</strong> dengan keyword "nama perusahaan + penipuan"</p>
+                            <div class="bg-blue-50 p-4 rounded-lg mt-2">
+                                <p class="text-sm text-blue-700"><strong>Contoh:</strong> Perusahaan "PT Makmur Sejahtera" harus memiliki NPWP, alamat jelas, dan kontak resmi. Jika hanya punya website tanpa alamat fisik, waspada!</p>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <strong>Analisis Iklan Lowongan</strong>
+                            <p>Ciri-ciri lowongan mencurigakan:
+                            <br>• <strong>Syarat terlalu mudah:</strong> "Tanpa pengalaman, tanpa ijazah"
+                            <br>• <strong>Gaji tidak realistis:</strong> Gaji Rp 15-20 juta untuk posisi entry level
+                            <br>• <strong>Proses rekrutmen terlalu cepat:</strong> "Diterima langsung hari ini juga"
+                            <br>• <strong>Tugas tidak jelas:</strong> Deskripsi pekerjaan ambigu atau tidak spesifik</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Waspada Biaya Awal</strong>
+                            <p>Perusahaan legit TIDAK akan meminta:
+                            <br>• <strong>Uang administrasi</strong> (berkisar Rp 100.000 - Rp 2.000.000)
+                            <br>• <strong>Biaya training/sertifikasi</strong> di muka
+                            <br>• <strong>Pembelian produk/starter kit</strong> sebagai syarat kerja
+                            <br>• <strong>Setoran deposit</strong> untuk peralatan kerja</p>
+                            <div class="bg-red-50 p-4 rounded-lg mt-2">
+                                <p class="text-sm text-red-700"><strong>Tips:</strong> Jika diminta transfer, selalu minta invoice resmi dengan kop perusahaan dan tanda tangan. Transfer hanya ke rekening atas nama perusahaan, bukan pribadi.</p>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <strong>Cek Proses Interview</strong>
+                            <p>Interview yang mencurigakan:
+                            <br>• Dilakukan hanya via WhatsApp/Telegram tanpa video call
+                            <br>• Pewawancara tidak bisa menunjukkan identitas lengkap
+                            <br>• Dilakukan di tempat tidak wajar (cafe, mall, bukan kantor)
+                            <br>• Waktunya mendadak dan terburu-buru</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Verifikasi Kontak Perusahaan</strong>
+                            <p>Lakukan cross-check:
+                            <br>• Telepon kantor perusahaan dari sumber resmi (bukan nomor dari iklan)
+                            <br>• Cek email domain perusahaan (nama@perusahaan.co.id, bukan @gmail.com)
+                            <br>• Verifikasi HRD melalui LinkedIn profil resmi perusahaan
+                            <br>• Minta kartu identitas pewawancara</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Amankan Data Pribadi</strong>
+                            <p>Jangan berikan:
+                            <br>• <strong>Foto KTP/KK</strong> sebelum kontrak kerja ditandatangani
+                            <br>• <strong>Data rekening bank</strong> lengkap (cukup nama bank dan nomor rekening)
+                            <br>• <strong>Foto selfie dengan KTP</strong> (bisa disalahgunakan untuk pinjol illegal)
+                            <br>• <strong>Data keluarga</strong> lengkap</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Kenali Modus Job Scam Terbaru</strong>
+                            <p>Modus 2024:
+                            <br>• <strong>Job Instagram Manager:</strong> Bayar Rp 300.000 untuk jadi admin IG, ternyata MLM
+                            <br>• <strong>Dropshipper Resmi:</strong> Beli produk Rp 5 juta janji dapat komisi besar
+                            <br>• <strong>Virtual Assistant:</strong> Kerja remote tapi harus bayar software license dulu
+                            <br>• <strong>Kurir Barang:</strong> Antar paket tapi isinya barang illegal</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Gunakan Platform Terpercaya</strong>
+                            <p>Prioritaskan:
+                            <br>• <strong>Job portal resmi:</strong> Kalibrr, JobStreet, LinkedIn Jobs
+                            <br>• <strong>Career fair kampus/event resmi</strong>
+                            <br>• <strong>Referensi dari kenalan/kolega</strong>
+                            <br>• Hindari grup Facebook/Telegram tanpa moderator jelas</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Cek Skema Kompensasi</strong>
+                            <p>Skema mencurigakan:
+                            <br>• Gaji berdasarkan komisi/referral tanpa gaji pokok
+                            <br>• Bonus besar untuk merekrut orang lain (cirri MLM/ponzi)
+                            <br>• Komisi berdasarkan penjualan produk yang harus dibeli dulu
+                            <br>• Sistem poin/level yang kompleks</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Lakukan Due Diligence</strong>
+                            <p>Sebelum tanda tangan kontrak:
+                            <br>• Kunjungi kantor fisik (jika memungkinkan)
+                            <br>• Minta perjanjian kerja tertulis sebelum mulai kerja
+                            <br>• Cek review karyawan di Glassdoor/TalentVerse
+                            <br>• Tanyakan detail benefit (BPJS, cuti, thr)</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Waspada Social Engineering</strong>
+                            <p>Taktik manipulasi:
+                            <br>• "Kesempatan ini hanya untuk Anda, jangan beri tahu orang lain"
+                            <br>• "Ini lowongan khusus, tidak diumumkan ke publik"
+                            <br>• "Kami butuh Anda segera, besok sudah harus mulai"
+                            <br>• "Sudah banyak yang daftar, slot tinggal sedikit"</p>
+                        </li>
+                        
+                        <li>
+                            <strong>Siapkan Kontingensi</strong>
+                            <p>Jika sudah terlanjur:
+                            <br>• <strong>JANGAN transfer uang</strong> lebih lanjut
+                            <br>• Kumpulkan bukti (chat, transfer, dokumen)
+                            <br>• Laporkan ke polisi cyber crime
+                            <br>• Laporkan ke platform tempat iklan ditemukan
+                            <br>• Bagikan pengalaman di forum untuk peringatan</p>
+                        </li>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Contoh Nyata Penipuan Lowongan Kerja 2024</h4>
+                    
+                    <div class="bg-gray-100 p-6 rounded-lg mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-bold mb-2 text-red-700">Kasus 1: PT Digital Indonesia</h5>
+                                <p class="text-sm text-gray-700 mb-2"><strong>Modus:</strong> Menawarkan pekerjaan "Social Media Specialist" gaji Rp 12 juta via WhatsApp.</p>
+                                <ul class="text-xs text-gray-600 list-disc pl-5 space-y-1">
+                                    <li>Diminta bayar administrasi Rp 750.000 via QRIS</li>
+                                    <li>Setelah bayar, diminta training fee Rp 1.500.000</li>
+                                    <li>Korban: 127 orang, total kerugian Rp 286 juta</li>
+                                    <li>Pelaku menggunakan identitas palsu dan website clone</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h5 class="font-bold mb-2 text-red-700">Kasus 2: MLM Berkedok Online Job</h5>
+                                <p class="text-sm text-gray-700 mb-2"><strong>Modus:</strong> Rekrut "Marketing Online" dengan sistem level dan bonus referral.</p>
+                                <ul class="text-xs text-gray-600 list-disc pl-5 space-y-1">
+                                    <li>Harus beli starter kit Rp 3.500.000</li>
+                                    <li>Dapat komisi Rp 500.000 per referral</li>
+                                    <li>Bukan gaji, tapi skema piramida</li>
+                                    <li>500+ korban, kerugian Rp 1,8 miliar</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold mb-4 text-gray-900">Tools Verifikasi Lowongan Kerja</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-white p-4 rounded-lg border border-gray-200">
+                            <div class="flex items-center mb-3">
+                                <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                                    <i class="fas fa-search text-blue-600"></i>
+                                </div>
+                                <h5 class="font-bold">Cek Legalitas Perusahaan</h5>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Kemnaker: sisnaker.kemnaker.go.id</li>
+                                <li>• AHU Online: ahu.go.id</li>
+                                <li>• OSS: oss.go.id</li>
+                                <li>• DJP: pajak.go.id</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-gray-200">
+                            <div class="flex items-center mb-3">
+                                <div class="bg-green-100 p-2 rounded-lg mr-3">
+                                    <i class="fas fa-shield-alt text-green-600"></i>
+                                </div>
+                                <h5 class="font-bold">Platform Pelaporan</h5>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Polri: patrolisiber.id</li>
+                                <li>• Kemnaker: pusatonaker.kemnaker.go.id</li>
+                                <li>• Bareskrim: 021-721-8000</li>
+                                <li>• Kominfo: aduankonten.id</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-gray-200">
+                            <div class="flex items-center mb-3">
+                                <div class="bg-purple-100 p-2 rounded-lg mr-3">
+                                    <i class="fas fa-users text-purple-600"></i>
+                                </div>
+                                <h5 class="font-bold">Forum Konsultasi</h5>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Forum Jobstreet Indonesia</li>
+                                <li>• LinkedIn Group "Jobseekers Indonesia"</li>
+                                <li>• Komunitas kampus/alumni</li>
+                                <li>• Layanan karir kampus</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="emergency-contacts">
+                        <h3 class="text-2xl font-bold mb-6">Kontak Darurat Penipuan Lowongan Kerja</h3>
+                        <ul>
+                            <li><strong>Kementerian Ketenagakerjaan:</strong> 1500-209 atau pengaduan@kemnaker.go.id</li>
+                            <li><strong>Bareskrim Polri (Cyber Crime):</strong> 110 atau cybercrime@polri.go.id</li>
+                            <li><strong>OJK (jika terkait investasi/MLM):</strong> 157 atau pengaduan@ojk.go.id</li>
+                            <li><strong>Kominfo (website/iklan palsu):</strong> 159 atau aduankonten@kominfo.go.id</li>
+                            <li><strong>Layanan Psikologis Korban:</strong> 119 ext 8 (KemenPPPA)</li>
+                        </ul>
+                        <div class="mt-6 p-4 bg-white/20 rounded-lg">
+                            <p class="text-sm"><strong>Catatan Penting:</strong> Selalu screenshot semua percakapan, simpan bukti transfer, dan catat nomor telepon/email pelaku sebelum melapor.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg">
+                        <h4 class="text-xl font-bold mb-4 text-gray-900">Checklist Cepat Lowongan Kerja Aman</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="job-check1" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="job-check1" class="text-gray-700">Perusahaan terdaftar di Kemnaker/AHU</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="job-check2" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="job-check2" class="text-gray-700">Tidak diminta uang administrasi/training</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="job-check3" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="job-check3" class="text-gray-700">Interview dilakukan dengan profesional</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="job-check4" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="job-check4" class="text-gray-700">Gaji realistis sesuai pasar</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="job-check5" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="job-check5" class="text-gray-700">Ada kontrak kerja sebelum mulai</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="job-check6" class="mr-3 h-5 w-5 text-blue-600">
+                                <label for="job-check6" class="text-gray-700">Tersedia BPJS Ketenagakerjaan</label>
+                            </div>
+                        </div>
+                        
+                        <button onclick="checkJobBoxes()" class="mt-6 bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-6 rounded-lg">
+                            <i class="fas fa-clipboard-check mr-2"></i> Verifikasi Checklist
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="gradient-bg w-10 h-10 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold">CyberCommunity</h1>
+                            <p class="text-xs text-gray-400">Edukasi Keamanan Digital Indonesia</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">Platform edukasi keamanan siber terlengkap untuk masyarakat Indonesia. Semua materi gratis dan terbuka untuk umum.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Materi Edukasi</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#learn" class="text-gray-400 hover:text-white">Penipuan Online</a></li>
+                        <li><a href="#learn" class="text-gray-400 hover:text-white">Teknik Hacker</a></li>
+                        <li><a href="#learn" class="text-gray-400 hover:text-white">Virus & Malware</a></li>
+                        <li><a href="#learn" class="text-gray-400 hover:text-white">Perlindungan Diri</a></li>
+                        <li><a href="#learn" class="text-gray-400 hover:text-white">Tools Keamanan</a></li>
+                        <li><a href="#learn" class="text-gray-400 hover:text-white">Lowongan Kerja Palsu</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Download E-book</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Template Laporan</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Template Verifikasi Perusahaan</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Checklist Lowongan Aman</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Daftar Perusahaan Abal-abal</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Glossary Istilah</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Kontak & Bantuan</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">cyberrcommunity@gmail.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">+62 859-5449-8360</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-whatsapp text-gray-400 mr-2"></i>
+                            <span class="text-gray-400">+62 859-5449-8360</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>&copy; 2025 CyberCommunity. Hak cipta dilindungi undang-undang.</p>
+                <p class="mt-2 text-sm">Materi edukasi ini dapat disebarluaskan dengan menyebutkan sumber. Untuk penggunaan komersial, hubungi kami.</p>
+                <p class="mt-2 text-xs">Disclaimer: Informasi di website ini untuk edukasi. Selalu verifikasi dengan sumber resmi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Notification -->
+    <div id="floatingNotification" class="floating-notification hidden">
+        <div>
+            <strong>Tips Keamanan Hari Ini:</strong>
+            <p id="tipContent" class="text-sm mt-1">Selalu verifikasi email pengirim sebelum klik link.</p>
+        </div>
+        <div class="close-notification" onclick="closeNotification()">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    
+    <!-- Quick Guide Modal -->
+    <div id="quick-guide-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('quick-guide-modal')">&times;</span>
+            <h3 class="text-2xl font-bold mb-6 text-gray-900">Panduan Cepat Keamanan Digital</h3>
+            
+            <div class="space-y-6">
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-blue-700">5 Langkah Penting Hari Ini:</h4>
+                    <ol class="list-decimal pl-5 text-gray-700 space-y-2">
+                        <li><strong>Update semua software</strong> - OS, browser, antivirus</li>
+                        <li><strong>Aktifkan 2FA</strong> untuk email dan media sosial</li>
+                        <li><strong>Backup data penting</strong> ke cloud atau harddisk eksternal</li>
+                        <li><strong>Gunakan password manager</strong> untuk buat & simpan password kuat</li>
+                        <li><strong>Edukasi keluarga</strong> tentang modus penipuan terbaru</li>
+                    </ol>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-red-700">Yang Harus Dihindari:</h4>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>Klik link dari email/SMS tidak dikenal</li>
+                        <li>Download software dari sumber tidak resmi</li>
+                        <li>Gunakan password sama untuk banyak akun</li>
+                        <li>Bagikan OTP/PIN ke siapa pun</li>
+                        <li>Percaya investasi dengan return tinggi tidak realistis</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-green-700">Jika Mencurigai Penipuan:</h4>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>Segera putuskan komunikasi</li>
+                        <li>Laporkan ke platform (email provider, bank, marketplace)</li>
+                        <li>Laporkan ke polisi cyber crime</li>
+                        <li>Ganti password akun yang terkait</li>
+                        <li>Monitor aktivitas keuangan</li>
+                    </ul>
+                </div>
+                
+                <div class="pt-4 border-t">
+                    <button onclick="closeModal('quick-guide-modal')" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg">
+                        <i class="fas fa-check mr-2"></i> Saya Mengerti
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Email Analyzer Modal -->
+    <div id="email-analyzer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('email-analyzer-modal')">&times;</span>
+            <h3 class="text-2xl font-bold mb-6 text-gray-900">Email Header Analyzer</h3>
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Paste email header di sini:</label>
+                <textarea id="emailHeaderInput" class="w-full border border-gray-300 rounded-lg px-4 py-3 h-64 font-mono text-sm" placeholder="Received: from mail.server.com ([192.168.1.1])
+by mx.google.com with ESMTPS id abc123
+for <user@example.com>; Fri, 15 Dec 2023 10:30:00 +0700
+From: "Bank ABC" <support@bank-abc.com>
+To: <user@example.com>
+Subject: Important: Verify Your Account"></textarea>
+            </div>
+            
+            <button onclick="analyzeEmailHeader()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-lg mb-6">
+                <i class="fas fa-search mr-2"></i> Analisis Header Email
+            </button>
+            
+            <div id="headerResult" class="hidden">
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h4 class="font-bold text-gray-900 mb-4">Hasil Analisis:</h4>
+                    <div id="headerAnalysisContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Detail Modals -->
+    <div id="phishing-detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('phishing-detail-modal')">&times;</span>
+            <h3 class="text-2xl font-bold mb-6 text-gray-900">Detail Lengkap: Phishing Attack</h3>
+            
+            <div class="space-y-6">
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-red-700">Apa itu Phishing?</h4>
+                    <p class="text-gray-700">Phishing adalah teknik penipuan online dimana penyerang menyamar sebagai entitas terpercaya (bank, e-commerce, instansi pemerintah) untuk mencuri informasi sensitif seperti username, password, nomor kartu kredit, atau data pribadi lainnya.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-2">Contoh Nyata Phishing Email:</h4>
+                    <div class="bg-gray-100 p-4 rounded-lg font-mono text-sm">
+                        <p><span class="text-red-600">From:</span> "BNI Customer Support" &lt;support@bni-security.com&gt;</p>
+                        <p><span class="text-red-600">To:</span> pelanggan@email.com</p>
+                        <p><span class="text-red-600">Subject:</span> [PENTING] Aktivitas Tidak Biasa Terdeteksi di Akun Anda</p>
+                        <p class="mt-2">Kepada Pelanggan BNI yang terhormat,</p>
+                        <p>Kami mendeteksi percobaan login yang tidak biasa dari perangkat baru pada akun BNI Internet Banking Anda. Untuk mencegah akses tidak sah, kami perlu memverifikasi identitas Anda.</p>
+                        <p class="mt-2">Segera verifikasi akun Anda dalam 24 jam dengan mengklik link berikut:</p>
+                        <p><span class="text-red-600">http://secure-bni.verification-id.com/login</span></p>
+                        <p class="mt-2">Jika tidak diverifikasi, akun Anda akan ditangguhkan sementara.</p>
+                        <p>Hormat kami,<br>Tim Keamanan BNI</p>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">Ciri-ciri phishing: (1) Domain email tidak resmi (@bni-security.com bukan @bni.co.id), (2) Sapaan umum "Pelanggan", (3) Rasa urgensi "dalam 24 jam", (4) Link mencurigakan bukan ke website resmi BNI.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-2">Statistik Phishing di Indonesia (2023):</h4>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                        <li>2,5 juta kasus phishing dilaporkan</li>
+                        <li>Kerugian finansial mencapai Rp 1,2 triliun</li>
+                        <li>75% phishing target sektor perbankan</li>
+                        <li>40% korban adalah usia 25-35 tahun</li>
+                        <li>Waktu peak: Jam 10-12 siang dan 7-9 malam</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-2">Cara Melindungi Diri:</h4>
+                    <ol class="list-decimal pl-5 text-gray-700 space-y-2">
+                        <li>Selalu periksa alamat email pengirim dengan teliti</li>
+                        <li>Jangan pernah klik link dalam email yang meminta verifikasi</li>
+                        <li>Akses website bank/e-commerce langsung dari browser, bukan dari link email</li>
+                        <li>Aktifkan two-factor authentication (2FA) untuk semua akun penting</li>
+                        <li>Gunakan email filter dan spam detection</li>
+                        <li>Laporkan email phishing ke provider email Anda</li>
+                    </ol>
+                </div>
+                
+                <div class="pt-4 border-t">
+                    <button onclick="closeModal('phishing-detail-modal')" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+        
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                window.scrollTo({
+                    top: element.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            }
+        }
+        
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                if (!tabId) return;
+                
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab and corresponding content
+                this.classList.add('active');
+                const tabContent = document.getElementById(tabId);
+                if (tabContent) {
+                    tabContent.classList.add('active');
+                }
+                
+                // Scroll to learn section if not already there
+                const learnSection = document.getElementById('learn');
+                const rect = learnSection.getBoundingClientRect();
+                if (rect.top < 0 || rect.bottom > window.innerHeight) {
+                    window.scrollTo({
+                        top: learnSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close modals with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+        
+        // Accordion functionality
+        function toggleAccordion(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = header.querySelector('i');
+            if (header.classList.contains('active')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+        
+        // Open detail modal for specific scam types
+        function openDetailModal(type) {
+            if (type === 'phishing') {
+                openModal('phishing-detail-modal');
+            } else if (type === 'investment') {
+                alert('Detail modal untuk investment scam akan ditampilkan di sini.');
+            }
+        }
+        
+        // Website safety checker
+        function checkWebsiteSafety() {
+            const url = document.getElementById('websiteCheckInput').value;
+            const resultDiv = document.getElementById('websiteCheckResult');
+            
+            if (!url) {
+                alert('Masukkan URL website terlebih dahulu');
+                return;
+            }
+            
+            resultDiv.classList.remove('hidden');
+            
+            // Simulate analysis
+            const isSafe = Math.random() > 0.4;
+            const hasSSL = Math.random() > 0.2;
+            const domainAge = Math.floor(Math.random() * 8) + 1;
+            const isBlacklisted = Math.random() > 0.7;
+            const reputation = isSafe ? 'Baik' : 'Buruk';
+            
+            let resultHtml = `
+                <div class="p-4 ${isSafe ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'} rounded-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h5 class="font-bold">Hasil Analisis</h5>
+                        <span class="font-bold ${isSafe ? 'text-green-600' : 'text-red-600'}">
+                            ${isSafe ? '✅ AMAN' : '❌ BERBAHAYA'}
+                        </span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span>SSL Certificate:</span>
+                            <span class="${hasSSL ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}">
+                                ${hasSSL ? 'Valid' : 'Tidak Valid'}
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Domain Age:</span>
+                            <span class="${domainAge > 2 ? 'text-green-600' : 'text-yellow-600'} font-medium">
+                                ${domainAge} tahun
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Blacklist Status:</span>
+                            <span class="${isBlacklisted ? 'text-red-600' : 'text-green-600'} font-medium">
+                                ${isBlacklisted ? 'Terdaftar' : 'Tidak Terdaftar'}
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Reputasi:</span>
+                            <span class="${isSafe ? 'text-green-600' : 'text-red-600'} font-medium">
+                                ${reputation}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm ${isSafe ? 'text-green-700' : 'text-red-700'}">
+                        ${isSafe ? 
+                            'Website ini tampak aman. Tetap waspada dan pastikan untuk selalu memeriksa SSL sebelum memasukkan data sensitif.' : 
+                            'Website ini berpotensi berbahaya. Hindari memasukkan data pribadi atau informasi sensitif apa pun.'}
+                    </div>
+                </div>
+            `;
+            
+            resultDiv.innerHTML = resultHtml;
+        }
+        
+        // Password strength tester
+        function checkPasswordStrength() {
+            const password = document.getElementById('passwordInput').value;
+            const resultDiv = document.getElementById('passwordResult');
+            
+            if (!password) {
+                alert('Masukkan password terlebih dahulu');
+                return;
+            }
+            
+            resultDiv.classList.remove('hidden');
+            
+            // Calculate strength
+            let score = 0;
+            let feedback = [];
+            
+            // Length check
+            if (password.length >= 12) score += 30;
+            else if (password.length >= 8) score += 15;
+            else feedback.push('Password terlalu pendek (minimal 8 karakter)');
+            
+            // Character variety checks
+            if (/[a-z]/.test(password)) score += 10;
+            else feedback.push('Tambahkan huruf kecil');
+            
+            if (/[A-Z]/.test(password)) score += 10;
+            else feedback.push('Tambahkan huruf besar');
+            
+            if (/[0-9]/.test(password)) score += 10;
+            else feedback.push('Tambahkan angka');
+            
+            if (/[^A-Za-z0-9]/.test(password)) score += 10;
+            else feedback.push('Tambahkan simbol (!@#$% dll)');
+            
+            // Common password check
+            const commonPasswords = ['password', '123456', 'qwerty', 'admin', 'welcome'];
+            if (commonPasswords.includes(password.toLowerCase())) {
+                score = 0;
+                feedback = ['Password terlalu umum dan mudah ditebak'];
+            }
+            
+            // Determine strength level
+            let strength, strengthClass, strengthColor;
+            if (score >= 60) {
+                strength = 'SANGAT KUAT';
+                strengthClass = 'text-green-600';
+                strengthColor = 'bg-green-500';
+            } else if (score >= 40) {
+                strength = 'KUAT';
+                strengthClass = 'text-blue-600';
+                strengthColor = 'bg-blue-500';
+            } else if (score >= 20) {
+                strength = 'SEDANG';
+                strengthClass = 'text-yellow-600';
+                strengthColor = 'bg-yellow-500';
+            } else {
+                strength = 'LEMAH';
+                strengthClass = 'text-red-600';
+                strengthColor = 'bg-red-500';
+            }
+            
+            // Generate result HTML
+            let resultHtml = `
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <div class="flex justify-between items-center mb-2">
+                        <h5 class="font-bold">Kekuatan Password:</h5>
+                        <span class="font-bold ${strengthClass}">${strength}</span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="h-2 bg-gray-300 rounded-full overflow-hidden">
+                            <div class="h-full ${strengthColor}" style="width: ${Math.min(score, 70)}%"></div>
+                        </div>
+                        <div class="text-right text-xs text-gray-500 mt-1">Skor: ${score}/70</div>
+                    </div>
+            `;
+            
+            if (feedback.length > 0 && score < 60) {
+                resultHtml += `
+                    <div class="text-sm">
+                        <p class="font-medium mb-1">Saran perbaikan:</p>
+                        <ul class="list-disc pl-5 text-gray-700">
+                `;
+                feedback.forEach(item => {
+                    resultHtml += `<li>${item}</li>`;
+                });
+                resultHtml += `</ul></div>`;
+            } else if (score >= 60) {
+                resultHtml += `<p class="text-green-600 text-sm">✓ Password Anda sudah cukup kuat. Pertahankan!</p>`;
+            }
+            
+            resultHtml += `</div>`;
+            
+            resultDiv.innerHTML = resultHtml;
+        }
+        
+        // File scanner simulation
+        function scanFile() {
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files.length) return;
+            
+            const scanResult = document.getElementById('scanResult');
+            const progressBar = document.getElementById('scanProgressBar');
+            const resultContent = document.getElementById('scanResultContent');
+            
+            scanResult.classList.remove('hidden');
+            progressBar.style.width = '0%';
+            resultContent.innerHTML = '<p class="text-gray-600">Memulai scan...</p>';
+            
+            // Simulate scanning progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress > 100) progress = 100;
+                progressBar.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    
+                    // Random result
+                    const isInfected = Math.random() > 0.7;
+                    const fileName = fileInput.files[0].name;
+                    
+                    if (isInfected) {
+                        resultContent.innerHTML = `
+                            <div class="virus-scan-result">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-exclamation-triangle text-red-500 text-xl mr-3"></i>
+                                    <h5 class="font-bold text-lg">FILE BERBAHAYA DITEMUKAN!</h5>
+                                </div>
+                                <p class="text-gray-700 mb-3">File <strong>${fileName}</strong> terdeteksi mengandung malware:</p>
+                                <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                    <li><strong>Jenis:</strong> Trojan.GenericKDZ.12345</li>
+                                    <li><strong>Tingkat bahaya:</strong> Tinggi</li>
+                                    <li><strong>Efek:</strong> Dapat mencuri data dan menginfeksi sistem</li>
+                                </ul>
+                                <div class="mt-4">
+                                    <button class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg mr-3">
+                                        <i class="fas fa-trash mr-1"></i> Hapus File
+                                    </button>
+                                    <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-4 rounded-lg">
+                                        Karantina
+                                    </button>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-4">Saran: Hapus file ini segera dan scan seluruh sistem dengan antivirus terupdate.</p>
+                            </div>
+                        `;
+                    } else {
+                        resultContent.innerHTML = `
+                            <div class="virus-scan-result safe">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-check-circle text-green-500 text-xl mr-3"></i>
+                                    <h5 class="font-bold text-lg">FILE AMAN</h5>
+                                </div>
+                                <p class="text-gray-700 mb-3">File <strong>${fileName}</strong> telah discan dan tidak ditemukan malware.</p>
+                                <div class="bg-green-100 p-3 rounded-lg">
+                                    <p class="text-green-700 text-sm">✓ Tidak ada virus terdeteksi<br>
+                                    ✓ Tidak ada trojan atau malware<br>
+                                    ✓ File aman untuk digunakan</p>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-4">Tetap waspada dan scan file dari sumber tidak dikenal sebelum membukanya.</p>
+                            </div>
+                        `;
+                    }
+                }
+            }, 200);
+        }
+        
+        // Simulate virus scan
+        function simulateVirusScan() {
+            const scanResult = document.getElementById('scanResult');
+            const progressBar = document.getElementById('scanProgressBar');
+            const resultContent = document.getElementById('scanResultContent');
+            
+            scanResult.classList.remove('hidden');
+            progressBar.style.width = '0%';
+            resultContent.innerHTML = '<p class="text-gray-600">Memulai simulasi scan sistem...</p>';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                progressBar.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    
+                    // Show scan summary
+                    const threatsFound = Math.floor(Math.random() * 5);
+                    
+                    if (threatsFound > 0) {
+                        resultContent.innerHTML = `
+                            <div class="virus-scan-result">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-exclamation-triangle text-red-500 text-xl mr-3"></i>
+                                    <h5 class="font-bold text-lg">${threatsFound} ANCAMAN DITEMUKAN!</h5>
+                                </div>
+                                <p class="text-gray-700 mb-3">Scan sistem menemukan ${threatsFound} ancaman keamanan:</p>
+                                <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                    <li>${threatsFound >= 1 ? 'Trojan.Generic ditemukan di folder Downloads' : ''}</li>
+                                    <li>${threatsFound >= 2 ? 'Adware.Popup di ekstensi browser' : ''}</li>
+                                    <li>${threatsFound >= 3 ? 'PUA (Potentially Unwanted Application) terdeteksi' : ''}</li>
+                                    <li>${threatsFound >= 4 ? 'Tracking cookie dari website mencurigakan' : ''}</li>
+                                </ul>
+                                <div class="mt-4">
+                                    <button class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg">
+                                        <i class="fas fa-shield-alt mr-1"></i> Bersihkan Semua
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        resultContent.innerHTML = `
+                            <div class="virus-scan-result safe">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-check-circle text-green-500 text-xl mr-3"></i>
+                                    <h5 class="font-bold text-lg">SISTEM AMAN</h5>
+                                </div>
+                                <p class="text-gray-700 mb-3">Scan sistem lengkap selesai. Tidak ditemukan ancaman keamanan.</p>
+                                <div class="bg-green-100 p-3 rounded-lg">
+                                    <p class="text-green-700 text-sm">✓ Tidak ada malware terdeteksi<br>
+                                    ✓ Sistem operasi up-to-date<br>
+                                    ✓ Firewall aktif<br>
+                                    ✓ Antivirus berjalan normal</p>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-4">Pertahankan keamanan sistem dengan update rutin dan hindari download dari sumber tidak tepercaya.</p>
+                            </div>
+                        `;
+                    }
+                }
+            }, 300);
+        }
+        
+        // Email header analyzer
+        function analyzeEmailHeader() {
+            const header = document.getElementById('emailHeaderInput').value;
+            const resultDiv = document.getElementById('headerResult');
+            const contentDiv = document.getElementById('headerAnalysisContent');
+            
+            if (!header.trim()) {
+                alert('Masukkan email header terlebih dahulu');
+                return;
+            }
+            
+            resultDiv.classList.remove('hidden');
+            
+            // Simple header analysis simulation
+            const hasSpoofing = header.includes('from:') && header.toLowerCase().includes('gmail') && header.includes('by ') && !header.toLowerCase().includes('google.com');
+            const hasInvalidSPF = !header.includes('spf=pass');
+            const hasInvalidDKIM = !header.includes('dkim=pass');
+            const isRelayed = (header.match(/received:/gi) || []).length > 3;
+            
+            let analysis = `
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span>Spoofing Detection:</span>
+                        <span class="${hasSpoofing ? 'text-red-600 font-medium' : 'text-green-600 font-medium'}">
+                            ${hasSpoofing ? 'Mungkin Spoofing' : 'Normal'}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>SPF Check:</span>
+                        <span class="${hasInvalidSPF ? 'text-red-600 font-medium' : 'text-green-600 font-medium'}">
+                            ${hasInvalidSPF ? 'Gagal' : 'Berhasil'}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>DKIM Check:</span>
+                        <span class="${hasInvalidDKIM ? 'text-red-600 font-medium' : 'text-green-600 font-medium'}">
+                            ${hasInvalidDKIM ? 'Gagal' : 'Berhasil'}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Relay Count:</span>
+                        <span class="${isRelayed ? 'text-yellow-600 font-medium' : 'text-green-600 font-medium'}">
+                            ${isRelayed ? 'Terlalu Banyak' : 'Normal'}
+                        </span>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 ${hasSpoofing || hasInvalidSPF || hasInvalidDKIM ? 'bg-red-50 border border-red-200' : 'bg-green-50 border border-green-200'} rounded-lg">
+                    <p class="${hasSpoofing || hasInvalidSPF || hasInvalidDKIM ? 'text-red-700' : 'text-green-700'} text-sm">
+                        ${hasSpoofing || hasInvalidSPF || hasInvalidDKIM ? 
+                            '⚠️ Email ini mencurigakan dan mungkin phishing. Jangan percaya kontennya dan jangan klik link atau download attachment.' : 
+                            '✓ Email ini tampak legit dari sisi teknis. Tetap verifikasi dengan konten dan pengirim.'}
+                    </p>
+                </div>
+            `;
+            
+            contentDiv.innerHTML = analysis;
+        }
+        
+        // Checklist functionality
+        function checkAllBoxes() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            showNotification('Selamat! Checklist keamanan harian Anda sudah lengkap.');
+        }
+        
+        // NEW: Fungsi untuk checklist lowongan kerja
+        function checkJobBoxes() {
+            const checkboxes = document.querySelectorAll('#job-scam-tab input[type="checkbox"]');
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const total = checkboxes.length;
+            
+            if (checkedCount === total) {
+                showNotification('✅ Semua checklist lowongan kerja terpenuhi! Lowongan ini AMAN untuk dilamar.');
+            } else {
+                showNotification(`⚠️ ${checkedCount}/${total} checklist terpenuhi. Lowongan ini BERESIKO, verifikasi lebih lanjut!`);
+            }
+        }
+        
+        // Notification system
+        const tips = [
+            "Selalu verifikasi email pengirim sebelum klik link.",
+            "Gunakan password berbeda untuk setiap akun online.",
+            "Aktifkan two-factor authentication (2FA) untuk akun penting.",
+            "Update sistem operasi dan software secara rutin.",
+            "Hindari wifi publik untuk transaksi finansial.",
+            "Backup data penting secara rutin ke cloud atau harddisk eksternal.",
+            "Scan file download dengan antivirus sebelum membuka.",
+            "Waspada investasi dengan return tinggi tidak realistis.",
+            "Jangan berikan OTP/PIN ke siapa pun, termasuk yang mengaku dari bank.",
+            "Cek izin OJK sebelum investasi di platform fintech.",
+            // Tips baru:
+            "Verifikasi perusahaan di Kemnaker sebelum melamar kerja.",
+            "Perusahaan legit tidak minta uang administrasi untuk melamar.",
+            "Waspada lowongan dengan gaji terlalu tinggi untuk posisi entry level.",
+            "Selalu minta kontrak kerja tertulis sebelum mulai bekerja.",
+            "Cek review perusahaan di forum jobseeker sebelum interview."
+        ];
+        
+        function showNotification(message) {
+            const notification = document.getElementById('floatingNotification');
+            const tipContent = document.getElementById('tipContent');
+            
+            tipContent.textContent = message;
+            notification.classList.remove('hidden');
+            
+            // Auto hide after 10 seconds
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 10000);
+        }
+        
+        function showRandomTip() {
+            const randomIndex = Math.floor(Math.random() * tips.length);
+            showNotification(tips[randomIndex]);
+        }
+        
+        function closeNotification() {
+            document.getElementById('floatingNotification').classList.add('hidden');
+        }
+        
+        // Show random tip after page loads
+        window.addEventListener('load', function() {
+            setTimeout(showRandomTip, 3000);
+            
+            // Show new tip every 2 minutes
+            setInterval(showRandomTip, 120000);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                e.preventDefault();
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active nav for anchor links
+                    if (href === '#home') {
+                        document.querySelectorAll('nav a').forEach(navLink => {
+                            navLink.classList.remove('nav-active');
+                        });
+                        document.querySelector('nav a[href="#home"]').classList.add('nav-active');
+                    }
+                }
+            });
+        });
+        
+        // Update active nav on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('nav-active');
+                }
+            });
+        });
+        
+        // Prevent form submission for demo purposes
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Fitur ini hanya demonstrasi. Di aplikasi nyata, data akan diproses.');
+            });
+        });
+    </script>
+</body>
+</html>
